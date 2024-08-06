@@ -1,4 +1,5 @@
-﻿using blog.domain.entity;
+﻿using blog.application.Contract.DTO.Article;
+using blog.domain.entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +10,10 @@ namespace blog.application.Contract.Api.Interface
 {
     public interface IArticleService
     {
-        Task<IEnumerable<ArticleModel>> GetAllArticles();
-        Task<ArticleModel> GetArticleById(int id);
-        Task AddArticle(ArticleModel article);
-        Task UpdateArticle(ArticleModel article);
+        Task<IEnumerable<ArticleGetResponseDTO>> GetAllArticles();
+        Task<ArticleGetResponseDTO> GetArticleById(int id);
+        Task<int> AddArticle(ArticleCreateRequestDTO articleDto);
+        Task UpdateArticle(ArticleUpdateRequestDTO articleDto);
         Task DeleteArticle(int id);
     }
 }

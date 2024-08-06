@@ -1,5 +1,7 @@
 ﻿using blog.application.Contract.Api.Interface;
+using blog.application.Contract.DTO.Article;
 using blog.application.Contract.infrastructure;
+using blog.application.Contract.Mapper;
 using blog.domain.entity;
 using System;
 using System.Collections.Generic;
@@ -18,23 +20,28 @@ namespace blog.application.Services
             _articleRepository = articleRepository;
         }
 
-        public async Task<IEnumerable<ArticleModel>> GetAllArticles()
+        public async Task<IEnumerable<ArticleGetResponseDTO>> GetAllArticles()
         {
-            return await _articleRepository.GetAll();
+            var articles = await _articleRepository.GetAll();
+            return articles.Select(article => article.ConvertArticleModelToGetArticleResponseDTO());
         }
 
-        public async Task<ArticleModel> GetArticleById(int id)
+        public async Task<ArticleGetResponseDTO> GetArticleById(int id)
         {
-            return await _articleRepository.GetById(id);
+            var article = await _articleRepository.GetById(id);
+            return article?.ConvertArticleModelToGetArticleResponseDTO();
         }
 
-        public async Task AddArticle(ArticleModel article)
+        public async Task<int> AddArticle(ArticleCreateRequestDTO articleDto)
         {
+            var article = articleDto.ConvertArticleCreateRequestDTOToArticle();
             await _articleRepository.Add(article);
+            return article.Id; 
         }
 
-        public async Task UpdateArticle(ArticleModel article)
+        public async Task UpdateArticle(ArticleUpdateRequestDTO articleDto)
         {
+            var article = articleDto.ConvertArticleUpdateRequestDTOToArticle();
             await _articleRepository.Update(article);
         }
 

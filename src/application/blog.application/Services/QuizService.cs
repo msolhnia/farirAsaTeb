@@ -1,5 +1,7 @@
 ﻿using blog.application.Contract.Api.Interface;
+using blog.application.Contract.DTO.Quiz;
 using blog.application.Contract.infrastructure;
+using blog.application.Contract.Mapper;
 using blog.domain.entity;
 using System;
 using System.Collections.Generic;
@@ -18,23 +20,28 @@ namespace blog.application.Services
             _quizRepository = quizRepository;
         }
 
-        public async Task<IEnumerable<QuizModel>> GetQuizzesByArticleId(int articleId)
+        public async Task<IEnumerable<QuizGetResponseDTO>> GetQuizzesByArticleId(int articleId)
         {
-            return await _quizRepository.GetByArticleId(articleId);
+            var quizzes = await _quizRepository.GetByArticleId(articleId);
+            return quizzes.Select(quiz => quiz.ConvertQuizModelToQuizGetResponseDTO());
         }
 
-        public async Task<QuizModel> GetQuizById(int id)
+        public async Task<QuizGetResponseDTO> GetQuizById(int id)
         {
-            return await _quizRepository.GetById(id);
+            var quiz = await _quizRepository.GetById(id);
+            return quiz?.ConvertQuizModelToQuizGetResponseDTO();
         }
 
-        public async Task AddQuiz(QuizModel quiz)
+        public async Task<int> AddQuiz(QuizCreateRequestDTO quizDto)
         {
+            var quiz = quizDto.ConvertQuizCreateRequestDTOToQuiz();
             await _quizRepository.Add(quiz);
+            return quiz.Id; 
         }
 
-        public async Task UpdateQuiz(QuizModel quiz)
+        public async Task UpdateQuiz(QuizUpdateRequestDTO quizDto)
         {
+            var quiz = quizDto.ConvertQuizUpdateRequestDTOToQuiz();
             await _quizRepository.Update(quiz);
         }
 

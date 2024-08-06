@@ -21,7 +21,7 @@ namespace blog.infrastructure.Data.Repository
 
         public async Task<IEnumerable<QuizModel>> GetByArticleId(int articleId)
         {
-            return await _context.Quizzes.Where(q => q.Article.Id == articleId).ToListAsync();
+            return await _context.Quizzes.Where(q => q.ArticleId == articleId).ToListAsync();
         }
 
         public async Task<QuizModel> GetById(int id)

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using blog.infrastructure.Data.Persist;
 
@@ -11,9 +12,11 @@ using blog.infrastructure.Data.Persist;
 namespace blog.infrastructure.Migrations
 {
     [DbContext(typeof(FarirContext))]
-    partial class FarirContextModelSnapshot : ModelSnapshot
+    [Migration("20240806194248_models_changed")]
+    partial class modelschanged
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

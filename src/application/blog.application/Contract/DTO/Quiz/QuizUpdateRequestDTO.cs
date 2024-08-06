@@ -1,19 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace blog.domain.entity
+namespace blog.application.Contract.DTO.Quiz
 {
-    public class QuizModel
+    public class QuizUpdateRequestDTO
     {
-        [Key]
-        public int Id { get; set; }        
+        public int Id { get; set; }
         public string Question { get; set; }
         public string Options { get; set; }
         public string CorrectAnswer { get; set; }
-        public int ArticleId { get; set; }   
     }
 }

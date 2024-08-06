@@ -1,4 +1,5 @@
 ﻿using blog.application.Contract.Api.Interface;
+using blog.application.Contract.DTO.Article;
 using blog.domain.entity;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -17,14 +18,14 @@ namespace blog.api.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ArticleModel>>> GetAllArticles()
+        public async Task<ActionResult<IEnumerable<ArticleGetResponseDTO>>> GetAllArticles()
         {
             var articles = await _articleService.GetAllArticles();
             return Ok(articles);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<ArticleModel>> GetArticleById(int id)
+        public async Task<ActionResult<ArticleGetResponseDTO>> GetArticleById(int id)
         {
             var article = await _articleService.GetArticleById(id);
             if (article == null)
@@ -35,21 +36,16 @@ namespace blog.api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> AddArticle([FromBody] ArticleModel article)
+        public async Task<ActionResult> AddArticle([FromBody] ArticleCreateRequestDTO articleDto)
         {
-            await _articleService.AddArticle(article);
-            return CreatedAtAction(nameof(GetArticleById), new { id = article.Id }, article);
+            var newArticleId = await _articleService.AddArticle(articleDto);
+            return Ok(newArticleId);
         }
 
-        [HttpPut("{id}")]
-        public async Task<ActionResult> UpdateArticle(int id, [FromBody] ArticleModel article)
+        [HttpPut]
+        public async Task<ActionResult> UpdateArticle([FromBody] ArticleUpdateRequestDTO articleDto)
         {
-            if (id != article.Id)
-            {
-                return BadRequest();
-            }
-
-            await _articleService.UpdateArticle(article);
+            await _articleService.UpdateArticle(articleDto);
             return NoContent();
         }
 

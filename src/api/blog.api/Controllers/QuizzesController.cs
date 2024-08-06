@@ -1,4 +1,5 @@
 ﻿using blog.application.Contract.Api.Interface;
+using blog.application.Contract.DTO.Quiz;
 using blog.domain.entity;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -17,14 +18,14 @@ namespace blog.api.Controllers
         }
 
         [HttpGet("article/{articleId}")]
-        public async Task<ActionResult<IEnumerable<QuizModel>>> GetQuizzesByArticleId(int articleId)
+        public async Task<ActionResult<IEnumerable<QuizGetResponseDTO>>> GetQuizzesByArticleId(int articleId)
         {
             var quizzes = await _quizService.GetQuizzesByArticleId(articleId);
             return Ok(quizzes);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<QuizModel>> GetQuizById(int id)
+        public async Task<ActionResult<QuizGetResponseDTO>> GetQuizById(int id)
         {
             var quiz = await _quizService.GetQuizById(id);
             if (quiz == null)
@@ -35,21 +36,16 @@ namespace blog.api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> AddQuiz([FromBody] QuizModel quiz)
+        public async Task<ActionResult<int>> AddQuiz([FromBody] QuizCreateRequestDTO quizDto)
         {
-            await _quizService.AddQuiz(quiz);
-            return CreatedAtAction(nameof(GetQuizById), new { id = quiz.Id }, quiz);
+            var newQuizId = await _quizService.AddQuiz(quizDto);
+            return Ok(newQuizId);
         }
 
-        [HttpPut("{id}")]
-        public async Task<ActionResult> UpdateQuiz(int id, [FromBody] QuizModel quiz)
+        [HttpPut]
+        public async Task<ActionResult> UpdateQuiz([FromBody] QuizUpdateRequestDTO quizDto)
         {
-            if (id != quiz.Id)
-            {
-                return BadRequest();
-            }
-
-            await _quizService.UpdateQuiz(quiz);
+            await _quizService.UpdateQuiz(quizDto);
             return NoContent();
         }
 
