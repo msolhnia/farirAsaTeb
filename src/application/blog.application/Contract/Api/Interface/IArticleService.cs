@@ -1,4 +1,4 @@
-﻿using blog.application.Contract.DTO.Article;
+﻿using blog.application.Contract.Api.DTO.Article;
 using blog.domain.entity;
 using System;
 using System.Collections.Generic;

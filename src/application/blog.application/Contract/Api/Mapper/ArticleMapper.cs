@@ -1,4 +1,4 @@
-﻿using blog.application.Contract.DTO.Article;
+﻿using blog.application.Contract.Api.DTO.Article;
 using blog.domain.entity;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
-namespace blog.application.Contract.Mapper
+namespace blog.application.Contract.Api.Mapper
 {
     public static class ArticleMapper
     {

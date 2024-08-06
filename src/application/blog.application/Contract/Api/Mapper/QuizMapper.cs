@@ -1,4 +1,4 @@
-﻿using blog.application.Contract.DTO.Quiz;
+﻿using blog.application.Contract.Api.DTO.Quiz;
 using blog.domain.entity;
 using System;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace blog.application.Contract.Mapper
+namespace blog.application.Contract.Api.Mapper
 {
     public static class QuizMapper
     {

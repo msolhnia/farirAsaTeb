@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace blog.application.Contract.DTO.Article
+namespace blog.application.Contract.Api.DTO.Article
 {
     public class ArticleCreateRequestDTO
     {

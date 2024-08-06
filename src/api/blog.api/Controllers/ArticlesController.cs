@@ -1,5 +1,5 @@
-﻿using blog.application.Contract.Api.Interface;
-using blog.application.Contract.DTO.Article;
+﻿using blog.application.Contract.Api.DTO.Article;
+using blog.application.Contract.Api.Interface;
 using blog.domain.entity;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
