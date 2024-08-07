@@ -11,6 +11,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "blog.application", "src\app
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "blog.api", "src\api\blog.api\blog.api.csproj", "{55CE8AB8-B815-4641-BCE7-D8DB6E6835B5}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{DC3A5F6B-1AFC-4D57-8284-041B1165B834}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.yml = docker-compose.yml
+		Dockerfile = Dockerfile
+		README.md = README.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
